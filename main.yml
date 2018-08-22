@@ -1,15 +1,8 @@
---- 
+---
 - hosts: webservers
-
--tasks:
-- name: apache installation
-  yum: pkg= httpd state= latest
-  notify:
-  - restart apache
-
-  - name: start apache
-    service: name=httpd state=started
-
-handlers:
-  - name: restart apache
-    sevice: name= httpd state=restarted     
+  sudo: yes
+  tasks:
+    - name: install apache2
+      yum: name=httpd update_cache=yes state=latest
+    - name: start apache2
+      service: name=httpd state=started    
