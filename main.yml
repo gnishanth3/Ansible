@@ -1,0 +1,15 @@
+--- 
+- hosts: webservers
+
+tasks:
+- name: apache installation
+  yum: pkg= httpd state= latest
+  notify:
+  - restart apache
+
+  - name: start apache
+    service: name=httpd state=started
+
+handlers:
+  - name: restart apache
+    sevice: name= httpd state=restarted     
